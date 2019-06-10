@@ -57,7 +57,7 @@ class Home extends React.Component {
           
           let Global = require('./Global');
           
-          fetch('http://127.0.0.1:8000/media/upload', {
+          fetch('http://103.6.254.175:8000/media/upload', {
             method: 'POST',
             headers: {
               Authorization:Global.userToken
@@ -113,7 +113,7 @@ class Home extends React.Component {
             
             let Global = require('./Global');
             
-            fetch('http://127.0.0.1:8000/media/upload', {
+            fetch('http://103.6.254.175:8000/media/upload', {
               method: 'POST',
               headers: {
                 Authorization:Global.userToken
@@ -171,7 +171,7 @@ class History extends React.Component {
     // 每1000毫秒对showText状态做一次取反操作
     setInterval(() => {
       let Global = require('./Global');
-        fetch('http://127.0.0.1:8000/users/self/media/recent', {
+        fetch('http://103.6.254.175:8000/users/self/media/recent', {
           method: 'GET',
           headers: {
             Authorization:Global.userToken
@@ -184,12 +184,12 @@ class History extends React.Component {
         .catch((error) =>{
         console.error(error);
         });
-    }, 10000);
+    }, 7000);
   }
 
   componentDidMount() {
     let Global = require('./Global');
-    fetch('http://127.0.0.1:8000/users/self/media/recent', {
+    fetch('http://103.6.254.175:8000/users/self/media/recent', {
       method: 'GET',
       headers: {
         Authorization:Global.userToken
@@ -198,7 +198,6 @@ class History extends React.Component {
     .then((response) => response.json())
     .then((responseData) => {
       this.setState({ videoList: responseData});
-      // Alert.alert("aaaaaa",this.state.videoList[0].image.standard_resolution)
     })
     .catch((error) =>{
     console.error(error);
@@ -237,7 +236,7 @@ class ShowVideos extends React.Component {
   }
 
   playVideo(item,index) {
-    const url = 'http://127.0.0.1:8080'+item.image.standard_resolution;
+    const url = 'http://103.6.254.175:8080'+item.image.standard_resolution;
     const { navigation } = this.props;  //获取navigation的navigate方法
     navigation.navigate('VideoPage', {url});  //跳转到注册过的VideoPages界面
 
@@ -265,14 +264,20 @@ class ShowVideos extends React.Component {
     // Linking.openURL(url) 
     
   }
+  showResult(item,index) {
+    const result = item
+    const { navigation } = this.props;  //获取navigation的navigate方法
+    navigation.navigate('ResultPage', {result});  //跳转到注册过的VideoPages界面 
+  }
 
   renderVideo = ({ item,index }) => {
+    videoListLen = this.props.data.length;
     if(item.finished){
       return (
         <View style={{marginBottom: 10}}>
           <View style={{flexDirection: 'row', alignItems: 'center',}}>
-            <Text style={{flex: 1}}>video{item.id}</Text>
-            <Text style={{flex: 1}}>objects</Text>
+            <Text style={{flex: 1}}>video{videoListLen-index}</Text>
+            <Text style={{flex: 1, color: '#58812F'}} onPress={this.showResult.bind(this, item, index)}>objects</Text>          
             <TouchableOpacity onPress={this.playVideo.bind(this, item, index)}>
               <Text style={{flex: 1, color: '#58812F'}}>play the video</Text> 
             </TouchableOpacity> 
@@ -284,7 +289,7 @@ class ShowVideos extends React.Component {
         return (
           <View style={{marginBottom: 10}}>
             <View style={{flexDirection: 'row', alignItems: 'flex-start',}}>
-              <Text style={{flex: 1}}>video{item.id}</Text>
+              <Text style={{flex: 1}}>video{videoListLen-index}</Text>
               <Text style={{flex: 1}}>processing</Text>
                <Animated.Text 
                     style={{
@@ -314,7 +319,7 @@ class ShowVideos extends React.Component {
         <View>
         <Text style={{marginTop: 20, marginBottom: 7, fontSize: 18,}}>History</Text>
         <Text style={{marginBottom: 7,}}>See your recent upload records</Text>
-        <Text style={{marginBottom: 7,}}>The newly video takes time to process</Text>
+        <Text style={{marginBottom: 7,}}>The new video takes time to process</Text>
         <Text style={{marginBottom: 20,}}>This may take a few minutes</Text>
         </View>
     );

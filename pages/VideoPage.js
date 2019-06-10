@@ -40,7 +40,7 @@ export default class VideoPage extends React.Component {
         resizeMode: 'contain',
         duration: 0.0,
         currentTime: 0.0,
-        paused: true,
+        paused: false,
     };
 
     componentWillMount() {
@@ -149,6 +149,7 @@ export default class VideoPage extends React.Component {
                         }}
                         /* 需要修改地址 修改为url*/
                         source={{uri: this.props.navigation.state.params.url}}
+                        // source={require('./result.mp4')}
                         style={styles.fullScreen}
                         rate={this.state.rate}
                         paused={this.state.paused}

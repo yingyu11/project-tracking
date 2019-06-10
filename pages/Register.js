@@ -65,7 +65,7 @@ export default class Register extends Component<Props> {
                     formData.append("username",this.username);
                     formData.append("password1",this.password);
                     formData.append("password2",this.confirmPassword);
-                    fetch('http://127.0.0.1:8000/register', {
+                    fetch('http://103.6.254.175:8000/register', {
                         method: 'POST',
                         headers: {},
                         body: formData,

@@ -50,7 +50,7 @@ export default class Login extends Component<Props> {
         let formData = new FormData();
         formData.append("username",this.username);
         formData.append("password",this.password);
-        fetch('http://127.0.0.1:8000/api-token-auth', {
+        fetch('http://103.6.254.175:8000/api-token-auth', {
             method: 'POST',
             headers: {},
             body: formData,

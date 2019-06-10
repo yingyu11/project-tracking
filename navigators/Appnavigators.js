@@ -3,6 +3,7 @@ import HomePage from '../pages/HomePage'
 import LoginPage from '../pages/Login'
 import Register from '../pages/Register'
 import VideoPage from '../pages/VideoPage'
+import ResultPage from '../pages/ResultPage'
 
 export const AppStackNavigator = createStackNavigator({
     LoginPage: {
@@ -31,6 +32,13 @@ export const AppStackNavigator = createStackNavigator({
         screen: VideoPage,
         navigationOptins: {
             title: 'VideoPage',
+            headerTitle: 'Tracking it'
+        }
+    },
+    ResultPage: {
+        screen: ResultPage,
+        navigationOptins: {
+            title: 'ResultPage',
             headerTitle: 'Tracking it'
         }
     }
